@@ -1,0 +1,381 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+
+
+\title{Notes on Heat Transfer for Cooling and Condensation of $^3$He}
+\author{L.~Schneider and J.W.~Martin}
+\date{\today}
+
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[natbib=true,style=numeric,sorting=none]{biblatex}
+\bibliography{references}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+    We present the basic equations needed to design cool and condense cryogenic fluids within horizontal tubes with a focus on $^3$He. Our treatment follows Chapter 6: Single-Phase convection Heat Transfer (p.~259-328) and Chapter 7: Two-Phase Heat Transfer and Pressure Drop (p.~329-416) of Ref.~\cite{bib:barron}.  The goal was to check and confirm the earlier calculations of T.~Okamura in Chapter 14.11 of Ref.~\cite{bib:cdr}.  For the calculations that we have completed thus far, we have found good agreement with those of T.~Okamura.
+\end{abstract}
+
+
+\section{Cooling:  Single Phase}
+
+When a warm fluid flows through a tube, the heat removed from the
+fluid by contact with the cool tube wall is given by \footnote{This is Eq. (6.7) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \dot{Q}=h_cA_W\Delta T,
+\end{equation}
+where $\dot{Q}$ is the heat transfer rate, $A_W$ is the area of the tube wall, and $h_c$ is the heat
+transfer coefficient.  The factor $\Delta T$ is the temperature
+difference between the fluid and the wall.  If the boundary layer is
+taken into account, the temperature difference between the boundary
+layer and fluid is used instead.  The temperature of the boundary
+layer is taken to the be average temperature of the wall and the
+fluid.
+
+By conservation of energy, the power removed by contact with the wall may be equated with the change in enthalpy of the fluid, which results in cooling. This is shown by \footnote{This is Eq. (6.39) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    h_c\frac{A_W}{L_0}(T-T_W)dL = -\dot{m}c_pdT
+    \label{eq:dt},
+\end{equation}
+where $dL$ is an infinitesimal length of the tube, $c_p$ is the specific heat capacity of the fluid (at constant pressure), $dT$ is the change in temperature, $T_W$ is the temperature of the wall, $L_0$ is the total length of the heat exchanger, and $\dot{m}$ is the total mass flow rate.
+%Comment on sign conventions.
+In Fig.~\ref{fig:picture}, Eq.~(\ref{eq:dt}) is explained graphically.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.45\textwidth]{geometry.png}
+\caption{Fluid flow in a tube, indicating geometrical factors.\label{fig:picture}}
+\end{center}
+\end{figure}
+
+The relation between the area of the tube wall $A_W$ and the total length $L_0$ is given by \footnote{See p.~307 of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \frac{A_W}{L_0}=\pi D,
+\end{equation}
+where $D$ is the inner diameter of the tube.
+The heat transfer coefficient $h_c$ is given by \footnote{This is Eq. (6.15) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    h_c=\frac{k_t Nu}{D},
+\end{equation}
+where $k_t$ is the thermal conductivity and $Nu$ is the Nusselt number.
+The Nusselt number is a dimensionless number determined from other correlations~\cite{bib:barron,bib:sciver,bib:sciver-uspas}, normally involving the Reynolds, Prandtl, or other numbers.
+
+The pressure drop in the fluid is \footnote{This is Eq.~(6.21) of Ref.~\cite{bib:barron} and p.~261.}
+\begin{equation}
+    \Delta p=\frac{fL}{2\rho D}\left(\frac{\dot{m}}{A_c}\right)^2,
+\end{equation}
+which can be written in the differential form
+\begin{equation}
+    dp=\frac{f}{2\rho D}\left(\frac{\dot{m}}{A_c}\right)^2dL,
+\label{eq:dp}
+\end{equation}
+where $f$ is the friction factor of the wall and $A_c$ is the flow passage cross-section area.
+
+By stepping along the tube $dL$, the decrease in temperature $dT$ and decrease in pressure $dp$ can be calculated using Eqs.~(\ref{eq:dt}) and (\ref{eq:dp}), respectively.
+
+
+
+\section{Condensation:  Dual Phase}
+
+Barron states \footnote{See p. 385 of \cite{bib:barron}.}: \textit{For liquid helium, the homogeneous flow model is fairly satisfactory in predicting the two-phase drop. This model is also valid for condensation heat transfer in annular flow for liquid helium.} He suggests that the heat transfer correlation of Ananiev et al. (1961) be used \footnote{This is Eq. (7.126) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    Nu=\frac{h_cD}{k_L}=0.023(Re_0)^{0.8}(Pr_L)^{1/3}\sqrt{(1-x)+\left(\frac{\rho _L}{\rho _G}\right)x}.
+    \label{eq:Nu}
+\end{equation}
+Here, $Re_0=\frac{D\dot{m}}{\mu_LA_C}$ is the Reynolds number assuming that the entire mass flow is effectively as if it were a liquid, $Pr_L$ is the Prandtl number of the liquid, $\rho_L$ is the density of the liquid, $\rho_G$ is the density of the gas and $x$ is the fractional amount of vapor by mass.
+According to Barron, this correlation is valid only for fluids with $\rho _L/\rho _G$ less than about 50. Equation~(\ref{eq:Nu}) can be used to calculate $h_c$, which describes the forced convection heat transfer of the two-phase flow with the take\footnote{This is Eq.~(7.86) of Ref.~\cite{bib:barron}.},
+\begin{equation}
+    d\dot{Q}=h_c\pi D(T-T_w)dL. 
+    \label{eq:dL}
+\end{equation}
+In this case, the heat transfer doesn't give rise to a temperature change because the fluid is at saturation. Instead the heat removed causes condensation of the gas into the liquid phase, resulting in a change in $x$ \footnote{This is Eq.~(7.78) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    d\dot{Q}=-\dot{m}i_{fg,e}dx.
+    \label{eq:dx}
+\end{equation}
+The quantity $i_{fg,e}$ is the ``effective" heat of vaporization, which accounts approximately for the subcooling in the condensate layer\footnote{See Eq.~(7.79) of Ref.~\cite{bib:barron}.}. In our calculations we used the latent heat of vaporization $i_{fg}$ instead of $i_{fg,e}$ because this is likely more relevant to homogeneous flow.  It can be calculated by
+\begin{equation}
+    i_{fg} = h_V - h_L,
+\end{equation}
+where $h_V$ is the enthalpy of the vapor and $h_L$ is the enthalpy of the liquid.
+The relation between the mass flow of the two states may be calculated by
+\begin{equation}
+    (1-x)\dot{m}=\dot{m}_L=\dot{m}-\dot{m_V}.
+\end{equation}
+Furthermore, Eq.~(\ref{eq:dx}) can be used to describe the mass flow rate of the condensate $\dot{m}_L$ as \footnote{This is Eq. (7.78) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \dot{m}_L=\frac{\dot{Q}}{i_{fg,e}}.
+\end{equation}
+
+Using Eqs.~(\ref{eq:dL}) and (\ref{eq:dx}), the phase change $dx/dL$ can be integrated along the length of the tube.  The results will also depends on $\dot{m}$ and on the latent heat.  The length of the tube required to fully condense the gas.
+
+
+
+\section{Calculations of two-phase flow and condensation for $^3$He\label{sec:dx}}
+
+In this Section we calculate the condensation of $^3$He in the future Ultracold Neutron (UCN) Source at TRIUMF.  This happens in a coil-type heat exchanger (HEX), which can be modeled as a horizontal copper tube in a helium-4 bath (the ``1~K pot''). The temperature of the bath is typically 1.6~K.
+
+For an example calculation, we used the following parameters:  tube inner diameter $d=6.2$~mm, mass flow $\dot m=1.1$~g/s, and $P_V=P_L=30 000 $~Pa with no pressure drop taken into account. In this first calculation, the wall temperature was assumed to be $T_{wall}=1.6$~K.  The phase change happens in saturated conditions and, since the pressure is assumed to be constant, the temperature of the $^3$He is also constant during the condensation process and is calculated from He3PAK to be 2.2398~K.  Because of this isochoric (same pressure) assumption, many other thermodynamic properties are also constant and must be determined at saturated conditions.  The densities of the gas and liquid phases are $\rho_V=6.390$~kg/m$^3$ and $\rho_L=76.08$~kg/m$^3$.  The enthalpy of the vapor and the liquid are $h_V=18693$~J/kg and $h_L=4130.9$~J/kg, and the viscosities of the vapor and liquid are $\mu_V=1.045\times 10^{-6}~{\rm Pa}\cdot{\rm s}$ and $\mu_L = 2.310\times 10^{-6}~{\rm Pa}\cdot{\rm s}$, respectively.  Quantities related to the heat transfer coefficient are:  the Reynolds number $Re_0=97789$, the Prandtl number of the liquid $Pr_L=0.6273$ and the thermal conductivity of the liquid $k_L=0.0129$~W/(m$\cdot\rm K$).  As a result of these quantities being constant, the two-phase heat-transfer coefficient $h_c$ depends only on $x$ (Eq.~(\ref{eq:Nu})).
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.48\textwidth]{x(L)-graph_T1-6.PNG}
+    \includegraphics[width=0.48\textwidth]{dQ_dot_dL_T1-6.PNG}
+    \caption{Condensation of isochoric $^3$He in $d=6.2$~mm tube for $\dot{m}=1.1$~g/s in homogeneous flow model using Ananiev correlation (a) vapour mass fraction $x$ as a function of distance $L$ along tube (b) $\frac{d\dot{Q}}{dL}$ as a function of $L$.  A wall temperature $T_w=1.6$~K has been used.  The equations displayed on the graph are determined by a least-squares fit to the points.}
+    \label{fig:dQ1-6}
+\end{figure}
+
+The calculation of $x(L)$ as a function of $L$ was done with initial condition
+$x(L=0)=1$, {\it i.e.}~saturated vapour phase.  Steps $\Delta L=0.01$~m were then taken along the tube, determining $d\dot{Q}$ from Eq.~(\ref{eq:dL}) and then $dx$ from Eq.~(\ref{eq:dx}).  The quantity $dx$ would then reduce the value of $x$ by a small amount, and the next step would be taken.  The results of the calculation are shown in Fig.~\ref{fig:dQ1-6} and in the excel sheet~\cite{bib:excel}.
+
+The vapour fraction $x$ is seen to decrease as a function of the distance along the tube $L$ (Fig.~\ref{fig:dQ1-6}). The vapour is fully converted to liquid at a distance of $L=1.43$~m. The heat transfer per unit length $d\dot{Q}/dL$ is seen to decrease slightly as the condensation occurs, with a mean value of about 11.17~W/m. The heat transfer per unit length behaves in this way because the correlation $Nu(x)$ in Eq.~(\ref{eq:Nu}) decreases when $x$ decreases. A total of $\dot{Q}=16$~W is removed, as expected, given the heat of vaporization and mass flow rate.
+
+The graphs in Fig.~\ref{fig:dQ1-6} have also been fitted using a least-squares regression. As will be discussed in Section~\ref{sec:integrals}, for the particular form of $Nu(x)$ in Eq.~(\ref{eq:Nu}), recognizing that all other factors are independent of $x$ and $L$ in the isochoric assumption, Eqs.~(\ref{eq:dx}) and (\ref{eq:dL}) can be equated and integrated analytically to solve for $x(L)$.  This results in $x$ being quadratic in $L$ and $d\dot{Q}/dL=-\dot{m}i_{fg}dx/dL$ being linear in $L$. This is confirmed by the fits in Fig.~\ref{fig:dQ1-6}.
+
+\begin{figure}
+    \centering
+  \begin{minipage}{\textwidth}
+  \raisebox{-0.5\height}{\includegraphics[width=0.48\textwidth]{cdr-fig-1414-right.PNG}}
+  \raisebox{-0.48\height}{\includegraphics[width=0.48\textwidth]{cdr-fig-1416-topleft.PNG}}
+  \end{minipage}
+  \caption{(left) Schematic description of the temperature gradients in calculation of T.~Okamura (taken from Fig.~14.14 of Ref.~\cite{bib:cdr}) (right) Results of calculation with $\dot{m}=0.5$~g/s (taken from Fig.~14.16 of Ref.~\cite{bib:cdr}).  The length of the two-phase region is 3.2~m.}
+    \label{fig:okamura}
+\end{figure}
+
+We tried to compare this calculation to one of T.~Okamura's calculations.  We selected the calculation presented in Ref.~\cite{bib:cdr} in Section~14.11.2.  Two figures from this calculation are repeated in Fig.~\ref{fig:okamura}, for reference.
+The calculation uses a much more detailed treatment of the heat transfer from the 1~K pot to the $^3$He, including the Kapitza resistance of the inner and outer walls of the Cu tube, the conduction through the Cu tube, and a form of treating the condensate on the walls as somewhat colder than the saturated two-phase flow (see Fig.~\ref{fig:okamura}, left panel).  The result of the two-phase portion of the calculation is indicated in Fig.~\ref{fig:okamura} (right) by the horizontal flat line which indicates the $^3$He saturation.  In all the length of tubing required for the phase change is 3.2~m.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{dQ_dot_0-5_0605.PNG}
+    \caption{Condensation of isochoric $^3$He in $d=6.0$~mm tube for $\dot{m}=0.5$~g/s in homogeneous flow model using Ananiev correlation (a) vapour mass fraction $x$ as a function of distance $L$ along tube. The wall temperature $T_w=1.6$~K, $T_w=1.8$~K, $T_w=1.9$~K, and $T_w=2.0$~K have been used. The curves follow a second order polynomial function. The graphs indicate the tube lengths shown in Table \ref{tab:okamura-lengths}.}
+    \label{fig:dQ0-5}
+\end{figure}
+
+In order to compare with this calculation, we used the following parameters in our method of calculation:  $\dot{m}=0.5$~g/s, $d=6.0$~mm, and $P_V=P_L=25,000$~Pa.  The pressure was adjusted to agree with the mixing temperature of the $^3$He indicated in Fig.~\ref{fig:okamura} (right).  We adjusted the wall temperature between 1.6 and 2.0~K in order to try to mimic the integrated effect of Kapitza resistance and conduction in the copper pipe. The results are shown in some figure \ref{fig:dQ0-5}.
+
+\begin{table}
+    \centering
+    \begin{tabular}{c|c}
+         $T_{\rm wall}$ (K) & $L$ (m) \\\hline
+         1.6 & 1.45 \\
+         1.7 & 1.79 \\
+         1.8 & 2.33 \\
+         1.9 & 3.35 \\
+         2.0 & 5.98 \\
+    \end{tabular}
+    \caption{Tube length required to fully condense saturated $^3$He, using the best guess parameters used in Section 14.11 of Ref.~\cite{bib:cdr}, for various assumptions of the wall temperature.}
+    \label{tab:okamura-lengths}
+\end{table}
+Table~\ref{tab:okamura-lengths} shows the calculated lengths required to fully condense the $^3$He from the vapour state to the liquid state in saturated conditions.
+
+Using $T_{\rm wall}=1.6$~K gave a tube length of 1.45~m.  This would ignore the effect of the Kapitza conductance and Cu conductivity.  Using $T_{\rm wall}=2.0$~K gave a tube length of 5.98~m.  The values of $T_{\rm wall}=1.8-1.9$~K gave tube lengths of $2.33-3.35$~m, respectively.  This compares well with the calculation presented in Fig.~\ref{fig:okamura} (right) because the $^3$He temperature at the pipe surface indicated in the Figure is in this range and the resultant tube length to fully condense was 3.2~m.
+
+It should be noted that Section~14.11 of Ref.~\cite{bib:cdr} describes a different correlation for the Nusselt number for the two-phase flow.  We suspect there could be an error in this formula because it seems to imply that the heat transfer is zero when $x=1$.  It would be nice to know the source of this correlation, so that we could implement it and make a more quantitative comparison.
+
+%Given parameters are the tube inner diameter $d=6.2$~mm, the mass flow $\dot m=1.1$~g/s, and starting $P_V=P_L=30 000 $~Pa. 
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.6\textwidth]{dQ_dot_1-1_0605.PNG}
+    \caption{Condensation of isochoric $^3$He in $d=6.2$~mm tube for $\dot{m}=1.1$~g/s in homogeneous flow model using Ananiev correlation vapour mass fraction $x$ as a function of distance $L$ along tube.  The left, and right functions are at a constant pressure of $p=50,000$~Pa, and $p=30,000$~Pa, respectively.}
+    \label{fig:dQ1-1}
+\end{figure}
+
+For a given mass flow rate, the length of the tube required for condensation is affected by the pressure.  This is demonstrated in Fig.~\ref{fig:dQ1-1}, for $\dot{m}=1.1$~g/s.
+In this calculation, the wall temperature was assumed to be $T_{wall}=1.8$~K, as seemed reasonable given our previous comparison with Fig.~\ref{fig:okamura}, done at 0.5~g/s.  The calculation shows that for higher pressure, the length of the tube can be shortened.  
+The vapour is fully converted to liquid at a distance of $L=1.06$~m, and $L=2.08$~m at $p=50000$~Pa, and $p=30000$~Pa, respectively.  The main effect here is that the temperature of the condensate increases at higher pressure in the saturated state, thereby increasing the difference with the assumed wall temperature.%and in the excel sheet \cite{bib:excel}. :explain why we chose those parameters
+A total of $\dot{Q}=16$~W and $\dot{Q}=15$~W is removed at $p=50000$~Pa, and $p=30000$~Pa, respectively, as expected, given the heat of vaporization and mass flow rate.
+
+\begin{figure}
+\centering
+    \includegraphics[width=0.48\textwidth]{x(L)-graph_4mm.PNG}
+    %\includegraphics[width=0.48\textwidth]{dQ_dot_dL_4mm.PNG}
+    \caption{Condensation of isochoric $^3$He in $d=4.0$~mm tube for $\dot{m}=1.1$~g/s in homogeneous flow model using Ananiev correlation; %(a)
+    vapour mass fraction $x$ as a function of distance $L$ along tube is shown.
+    %(b) $\frac{d\dot{Q}}{dL}$ as a function of $L$.  The equations displayed on the graph are determined by a least-squares fit to the points.
+    }
+    \label{fig:dQ4mm}
+\end{figure}
+
+The shorter tube length has a net benefit in reducing the total mass of $^3$He stored at any given time in the condensation region.  For $P_V=P_L=30,000$~Pa, about 4.8~g (36 standard litres) of $^3$He inhabits this section of tube, while half this amount (2.3~g or 17 standard liters) is required in the $P_V=P_L=50,000$~Pa case.
+Another way to save $^3$He is to decrease the tube diameter.  In Fig.~\ref{fig:dQ4mm} we keep $P_V=P_L=30,000$~Pa and set the diameter of the tube to $d=4$~mm. The total length is calculated to be $L=1.47$~m and the mass stored in the reduced volume is $m=1.405$~g (10.5 standard litres).
+
+A concern when deciding the tube diameter is the pressure drop within the tube.  In the next Section, we estimate the pressure drop for several of the situations studied above.  We find the pressure drop to be $< 1$~kPa in all cases.
+
+
+
+\section{Pressure drop}
+
+The homogeneous flow model can be used to estimate the pressure drop.  In two-phase flow the combination of frictional $\Delta p_f$ and momentum $\Delta p_m$ pressure drops must be included in order to calculate the total pressure drop
+\begin{equation}
+    \Delta p = \Delta p_f + \Delta p_m.
+\end{equation}
+The frictional pressure drop may be calculated from \footnote{This is Eq. (7.23) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \Delta p_f = \frac{fL}{D}\frac{G^2}{2\rho_m},
+\end{equation}
+where the mean density $\rho_m$ relates to the fluid quality $x$ by \footnote{This is Eq. (7.24) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \frac{1}{\rho_m}=\frac{1-x}{\rho_L}+\frac{x}{\rho_G},
+\end{equation}
+while we used $x$ at the mean quality \footnote{See p.~343 of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    x_m=\frac{1}{2}\left(x_1+x_2\right)
+    \label{eq:xm}
+\end{equation}
+where $x_1$ is the value of $x$ at the pipe inlet and $x_2$ at the outlet.
+Furthermore, $G=\dot{m}/A_c$ is the total mass flow rate per unit cross-sectional area and $f$ is the friction factor, which is given by \footnote{This is Eq.~(6.32) of Ref.~\cite{bib:barron} evaluated for $Re > 2\times 10^4$.}
+\begin{equation}
+    f = 0.184Re^{-0.20},
+\end{equation}
+where 
+\begin{equation}
+    Re=\frac{D\dot{m}}{A_c\mu_m},
+\end{equation}
+where \footnote{This is Eq. (7.25) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \frac{1}{\mu_m}=\frac{1-x}{\mu_L}+\frac{x}{\mu_G}
+\end{equation}
+defines the mean viscosity.  Here, $x$ would again be estimated by estimating the mean value $x_m$ from the value at each end of the tube (Eq.~(\ref{eq:xm})).  In the case of full condensation from vapour to liquid $x_m=0.5$.
+
+The momentum pressure drop is described by\footnote{This is Eq. (7.27) of Ref.~\cite{bib:barron}.}
+\begin{equation}
+    \Delta p_m = \frac{G^2(x_2-x_1)}{\rho_L}\left(\frac{\rho_L}{\rho_G}-1\right).
+\end{equation}
+In Ref.~\cite{bib:barron}, sample calculations are provided using these equations where liquid is being converted to vapour in the two-phase flow (evaporation), such that $x_2>x_1$.  In this case, both the frictional and momentum pressure drops are positive.
+
+In the case of condensation, we have the situation that $x_1<x_2$ and therefore the momentum pressure drop is negative.  In general, we found that the order of magnitude of $\Delta p_f$ and $\Delta p_m$ to be similar, and so they would partially cancel in most calculations.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c|c|c}
+%        Pressure & Temperature & Diameter & Mass flow & Frictional drop & Momentum drop & Total drop \\
+        $P$ & $T$ & $d$ & $L$ & $\dot{m}$ & $\Delta p_f$ & $\Delta p_m$ & $\Delta p$ & Comments \\
+        (Pa) & (K) & (mm) & (m) & (g/s) & (Pa) & (Pa) & (Pa) \\\hline
+        25,000 & 2.13 & 6.0 & 2.33 & 0.5 & 117 & -54  & 63  & Fig.~\ref{fig:dQ0-5}, $T_w=1.8$~K\\
+        30,000 & 2.24 & 6.2 & 2.08 & 1.1 & 318 & -190 & 127 & Fig.~\ref{fig:dQ1-1}\\
+        50,000 & 2.59 & 6.2 & 1.06 & 1.1 & 106 & -109 & -3 & Fig.~\ref{fig:dQ1-1} \\
+        30,000 & 2.24 & 4.0 & 1.47 & 1.1 & 1840 & -1100 & 740 & Fig.~\ref{fig:dQ4mm} \\
+    \end{tabular}
+    \caption{Calculation of pressure drops in the condensing tube for a variety of system parameters studied in Section~\ref{sec:dx}.}
+    \label{tab:pressure-drops}
+\end{table}
+
+Table~\ref{tab:pressure-drops} shows a summary of the estimated pressure drops for a variety of pressures and condensing tube dimensions.  Each entry relates to a condensation calculation (where the pressure drop was previously ignored) from Section~\ref{sec:dx}.  The pressure drop is found to be negative in the case of higher $^3$He pressure.  The pressure drop is largest and most positive for the smaller tube diameter ($d=4$~mm) calculation.  In all cases, the total pressure drop is less than 1~kPa.  We also tried using $d=2$~mm for the tube diameter, but this gave an unacceptably large pressure drop ($\sim 12$~kPa).
+
+Because the pressure drop is small relative to the initial pressure, these results justify having neglected the pressure drop in the earlier calculations from Section~\ref{sec:dx}.
+
+
+
+\section{Analytical solution for constant pressure and constant wall temperature}
+\label{sec:integrals}
+In the case of constant pressure (isochoric assumption) and constant wall temperature, the heat transfer equations can be solved analytically to determine $x(L)$.  This was mentioned earlier, in order to justify the form of the fit of the calculations in Section~\ref{sec:dx}.
+
+The solution comes from equating Eqs.~(\ref{eq:dL}) and (\ref{eq:dx}), resulting in
+\begin{equation}
+-\dot{m}i_{fg}\frac{dx}{dL}=\frac{k_L}{D}0.023Re_0^{0.8}Pr_L^{1/3}\pi D(T-T_w)\sqrt{(1-x)+\left(\frac{\rho_L}{\rho_G}x\right)}
+\end{equation}
+from which the derivative $dx/dL$ can be isolated
+\begin{equation}
+\frac{dx}{dL}=-\frac{k_L0.023Re_0^{0.8}Pr_L^{1/3}\pi (T-T_w)}{\dot{m}i_{fg}}\sqrt{(1-x)+\left(\frac{\rho_L}{\rho_G}x\right)}.
+\label{eq:integrable}
+\end{equation}
+On the left-hand side of Eq.~(\ref{eq:integrable}), in the isochoric assumption, all quantities are constants except for $x$.  This equation has the form
+\begin{equation}
+\frac{dx}{dL}=-C\sqrt{1+(\alpha-1)x},
+\label{eq:derivative}
+\end{equation}
+where 
+\begin{equation}
+\label{eq:C}
+C=\frac{\pi D(T-T_w)}{\dot{m}i_{fg}}\frac{k_L}{D}0.023Re_0^{0.8}Pr^{1/3}
+\end{equation}
+and 
+\begin{equation}
+\label{eq:alpha}
+\alpha=\frac{\rho_L}{\rho_G}
+\end{equation}
+are positive and real constants.  Equation~(\ref{eq:derivative}) can be rearranged and integrated, subject to the initial condition that $x(L=0)=1$, giving
+\begin{equation}
+\int_{1}^{x} \frac{dx}{\sqrt{1+(\alpha-1)x}}= -C\int_{0}^{L} dL.
+\end{equation}
+Performing the integrals results in
+\begin{equation}
+\sqrt{1+(\alpha -1)x}-\sqrt{\alpha}=-\frac{C(\alpha -1)L}{2}
+\label{eq:ell}
+\end{equation}
+which can be rearranged to solve for
+\begin{equation}
+x(L)=1-\sqrt{\alpha}CL+\frac{C^2(\alpha -1)L^2}{4}.
+\label{eq:xell}
+\end{equation}
+Alternately, Eq.~(\ref{eq:ell}) could be solved for $L(x)$ and used to determine the length of tube required for $x$ to reach zero (full condensation to liquid) $L(x=0)$.
+
+The constants $C$ and $\alpha$ may be determined using Eqs.~(\ref{eq:C}) and (\ref{eq:alpha}), and they agree with the fits presented in the Figures in Section~\ref{sec:dx}.  As an example, for the case presented in Fig.~\ref{fig:dQ1-1}, we find $C=0.2157$~(1/m) and $\alpha=11.91$.  Consequently, the coefficients in Eq.~(\ref{eq:xell}) are found to be
+\begin{equation}
+   \frac{C^2(\alpha -1)}{4}=0.1269~{\rm m}^{-2}
+\end{equation}
+and 
+\begin{equation}
+    -\sqrt{\alpha}CL=-0.7443~{\rm m}^{-1},
+\end{equation}
+which agrees with the fitted values: $x=0.1272~{\rm m}^{-2}~L^2-0.7457~{\rm m}^{-1}~L+1$.
+
+When the constant values of a certain case are inserted, Eq.~(\ref{eq:xell}) matches with the least-squares fit to the points of the graphs. 
+Furthermore, taking the derivative of the polynomial, the coefficients for the linear fit of $d\dot{Q}/dL$ agree as well.
+
+
+\section{Conclusion and Future Work}
+
+%As shown in the right graph of fig.~\ref{fig:okamura} during the cooling process of Helium 3, its temperature decreases in the gaseous phase, until it reaches saturation, which happens corresponding to the pressure at around 2.4~K.
+We studied the condensation of $^3$He following Ref.~\cite{bib:barron} in the UCN source.  We found good agreement with the calculations of T.~Okamura presented in Section 14.11.2 of Ref.~\cite{bib:cdr} once a rough estimate of the effect of Kapitza conductance and thermal conductance of Cu was taken into account.
+
+%Then the here discussed phase change occurs at saturation and constant T, while energy is still taken out of the system. After the $^3$He converted into the liquid state it is in its single phase again and its cooling can be further calculated as shown in cited graph of T.~Okamura.
+%With the set values of bath temperature, tube material and starting pressure, the length, till all gaseous $^3He$ is condensed, depends on the tube diameter and the mass flow rate. Seen in calculations with T.~Okamuras parameters, where the mass flow is less, the tube length will be shorter.
+
+The isochoric (constant pressure) assumption was studied and found to be relatively well justified by a partial cancellation of the frictional pressure drop by the momentum pressure drop.
+
+Increasing the pressure and/or decreasing the tube diameter were found to reduce the length of tubing to complete the condensation.  This has the advantage of less $^3$He being kept in the two-phase region.
+The diameter $d=4.0$~mm seemed to provide a reasonable reduction in overall length and volume without increasing the pressure drop above 1~kPa.
+
+%Another parameter, which has sever effect on the tube length is the wall temperature, which effects are shown in fig.~\ref{fig:dQ0-5}.
+
+A key assumption of our calculations was that the wall (or condensate) temperature was 1.8~K.  T.~Okamura's detailed model is able to calculate the wall and $^3$He condensate temperatures, whereas in our case we needed to assume some value, and so this is a caveat of the calculations presented.
+
+We have the following suggestions for future work which could lead to a more complete check of T.~Okamura's calculations:
+\begin{itemize}
+    \item Complete studies of the single phase regions of the HEX.  While the formalism to do this has been laid out, the calculations were not yet completed.
+    \item Implement a calculation of Kapitza conductance and thermal conduction in the Cu tube.  This would allow a more complete check of those aspects, which haven't been addressed, yet.
+\end{itemize}
+If the single phase calculations are included, then the total mass of $^3$He stored in the HEX can also be deduced.
+We also plan to upgrade our calculations to be done in python rather than in Excel, using a new interface to He3PAK~\cite{bib:pyhe3pak}.
+
+%Furthermore, these results show, thinner tubes have a higher pressure drop, but also a smaller amount of Helium3.
+%We conclude Okamuras calculations were right and shown possible changes in and their consequences. 
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=0.7\textwidth]{x(L)-graph_all_T1-6.PNG}
+%    \caption{Condensation of isochoric $^3$He in different tube diameters for different mass flow in homogeneous flow model using Ananiev correlation (a) vapour mass fraction $x$ as a function of distance $L$ along tube.}
+%    \label{fig:xall}
+%\end{figure}
+
+%\begin{figure}
+ %   \centering
+%    \includegraphics[width=0.7\textwidth]{dQ_dot_dL_all_T1-6.PNG}
+%    \caption{Condensation of isochoric $^3$He in different tube diameters for different mass flow in homogeneous flow model using Ananiev correlation (b) $\frac{d\dot{Q}}{dL}$ as a function of $L$.}
+%    \label{fig:Qall}
+%\end{figure}
+
+
+%\bibliographystyle{plain}
+%\bibliography{references}
+\printbibliography
+
+\end{document}
